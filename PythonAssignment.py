@@ -339,17 +339,7 @@ client.put_pixels(led_colour)
 client.put_pixels(led_colour)
 
 
-#circle_1=[3, 4, 5, 6, 62, 67, 121, 128, 181, 188, 242, 247, 303, 304, 305]  #circle 1
-#circle_2= [13, 14, 15, 16, 72, 77, 131, 138, 191, 198, 252, 257, 313, 314,315]  #circle 2
-#circle_3= [23,24,25,26,82,87, 141,148,201,208,262, 267, 323,324,325]  #circle 3
-#eyes= [63,65, 73,75, 83,85] #eyes
-#mouth_1=[183, 186, 244, 245] #mouth1
-#mouth_2=[193, 196, 254, 255] #mouth 2
-#mouth_3=[203, 206, 264, 265] #mouth3
-#235, 210, 52 # circle colour
-#52, 217, 235 #eye colour
-#232, 37, 37 #mouth colour
-#led_colour[circle_1] = (235, 210, 52)
+
 
 
 
