@@ -2,7 +2,6 @@ import os, random, time
 import opc
 import random
 import colorsys
-import numpy
 import tkinter as tk
 
 
