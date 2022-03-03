@@ -5,22 +5,9 @@ import colorsys
 import tkinter as tk
 
 
-#window = tk.Tk()
-
-#text = tk.Button(text = 'happy',command = happy)
-#text.pack()
-
-#window.mainloop()
-
-
-client = opc.Client('localhost:7890')
-
-led_colour = [(0,0,0)]*360
-
-        
+window = tk.Tk()
 
 def happy():
-    
     led= 0
     while led< 50:
         for led in range (40):
@@ -73,9 +60,55 @@ def happy():
             led_colour[106-led]=(52, 217, 235);
             client.put_pixels(led_colour)
             time.sleep(.1)
+        break
+client = opc.Client('localhost:7890')
 
-            break
-def
+led_colour = [(0,0,0)]*360
+
+def pattern () :
+    leds= [(0,0,0)] *360
+    led = 0
+    s= 1.0
+    v = 1.0
+    pixels=[]
+    for led in range (0,360,2):
+        leds[led]= (random.randint(0, 256), random.randint(0, 256), random.randint(0,256))
+        leds[led+1]=(255,0,255)
+        
+        client.put_pixels(leds)
+
+        time.sleep(.1)
+
+
+
+def snowday ():
+    while True:
+        for line in range(8):
+            led_colour = [ (0,0,0) ] * 360
+            for i in range(30):
+                led_colour[line * 30 + i * 4] = (255,255,255)
+      
+            client.put_pixels(led_colour)
+            time.sleep(0.5)
+
+#def curtains ():
+   # for 
+
+button= tk.Button(text = '☺happy☺', width = 10, height = 2, command= happy)
+button.pack(padx = 5, pady = 5 )
+button= tk.Button(text = '⨳pattern⨳', width = 10, height = 2, command= pattern)
+button.pack(padx = 5, pady = 5 )
+button= tk.Button(text = '❄snowday❄', width = 10, height = 2, command= snowday)
+button.pack(padx = 5, pady = 5 )
+window.mainloop()
+
+
+
+
+        
+
+
+#d\#ef
 
 #leds= [(0,0,0)] *360
 #client.put_pixels(led_colour)
@@ -93,21 +126,7 @@ def
 #led_colour[7] = newValue
 #client.put_pixels(led_colour)
 
-def pattern () :
-    leds= [(0,0,0)] *360
-    led = 0
-    s= 1.0
-    v = 1.0
-    pixels=[]
-    for led in range (0,360,2):
-        leds[led]= (random.randint(0, 256), random.randint(0, 256), random.randint(0,256))
-        leds[led+1]=(255,0,255)
-        client.put_pixels(leds)
 
-        time.sleep(.1)
-
-
-leds= [(0,0,0)] *360
 
     
 ##def snowday ():
@@ -210,22 +229,20 @@ v = 1.0 ##maximum brightness
 
 
 def snowday ():
+    #snowman
     while True:
         for line in range(8):
             led_colour = [ (0,0,0) ] * 360
             for i in range(30):
-                    led_colour[line * 60 + i * 2] = (255,255,255)
+                    led_colour[line * 30 + i * 4] = (255,255,255)
 
-                    # Label all strips always
+                    
                     
             client.put_pixels(led_colour)
             time.sleep(0.5)
 happy()
 pattern()
 snowday()
-#firework()
-#
-
 
 
 
