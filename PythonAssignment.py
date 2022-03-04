@@ -3,7 +3,7 @@ import opc
 import random
 import colorsys
 import tkinter as tk
-
+import numpy
 
 window = tk.Tk()
 
@@ -68,31 +68,71 @@ led_colour = [(0,0,0)]*360
 def pattern () :
     leds= [(0,0,0)] *360
     led = 0
-    s= 1.0
-    v = 1.0
-    pixels=[]
-    for led in range (0,360,2):
-        leds[led]= (random.randint(0, 256), random.randint(0, 256), random.randint(0,256))
-        leds[led+1]=(255,0,255)
+    
+    while True:
+        for led in range (0,360,2):
+            leds[led]= (random.randint(150, 255), random.randint(0,0), random.randint(150, 255))
+            client.put_pixels(leds)
+            time.sleep(.1)
+            leds[led+1]=(255,0,255)
+            time.sleep(.1)
         
-        client.put_pixels(leds)
+def blinking () :
+    leds= [(0,0,0)] *360
+    
+    
+    while True:
+       for led in range (0,360):
+            leds= [(255,0,0)]*360
+            client.put_pixels(leds)
+            time.sleep(.1)
+            leds=[(0,0,255)]*360
+            client.put_pixels(leds)
+            time.sleep(.1)
+       
+        
+ 
+        
+def rainbow ():
+    while True:
+        for hue in range(0,360):
+            s = 1.0 
+            v = 1.0 
+           
+            leds= [(0,0,0)]*360
+            
+           
+            rgb = colorsys.hsv_to_rgb(hue/180, s , v) 
+           
+            r_float = rgb[0] 
+            g_float = rgb[1]
+            b_float = rgb[2]
 
-        time.sleep(.1)
+            rgb = (r_float*255, g_float*255, b_float*255)
+            
+            leds[hue] = rgb 
+            client.put_pixels(leds) 
 
+            time.sleep(0.01)
+        break
 
 
 def snowday ():
     while True:
-        for line in range(8):
-            led_colour = [ (0,0,0) ] * 360
-            for i in range(30):
-                led_colour[line * 30 + i * 4] = (255,255,255)
-      
-            client.put_pixels(led_colour)
-            time.sleep(0.5)
+        for line in range(360):
+            leds = [ (0,0,0) ] * 360 # all leds black
+           
+            for led in range(30):
+                leds[line *60 + led * 2] = (255,255,255) 
+                
 
-#def curtains ():
-   # for 
+            client.put_pixels(leds)
+            time.sleep(0.1)
+
+
+
+
+
 
 button= tk.Button(text = '☺happy☺', width = 10, height = 2, command= happy)
 button.pack(padx = 5, pady = 5 )
@@ -100,153 +140,14 @@ button= tk.Button(text = '⨳pattern⨳', width = 10, height = 2, command= patte
 button.pack(padx = 5, pady = 5 )
 button= tk.Button(text = '❄snowday❄', width = 10, height = 2, command= snowday)
 button.pack(padx = 5, pady = 5 )
+button= tk.Button(text = '︵rainbow︵', width = 10, height = 2, command= rainbow)
+button.pack(padx = 5, pady = 5 )
+button= tk.Button(text = '⛯blinking⛯', width = 10, height = 2, command= blinking)
+button.pack(padx = 5, pady = 5 )
 window.mainloop()
 
 
 
 
         
-
-
-#d\#ef
-
-#leds= [(0,0,0)] *360
-#client.put_pixels(led_colour)
-
-
-
-#led_colour = [(255,0,0)]*10
-#led_colour[5] = (0, 255,0)
-
-#r, g, b = led_colour[7]
-#while r > 0:
-#    r -=5
-#    b +=5
-#newValue= (r,g,b)
-#led_colour[7] = newValue
-#client.put_pixels(led_colour)
-
-
-
-    
-##def snowday ():
-##    for led in range(360):
-##        leds= [(0,0,0)]*360
-##        leds[led] = (255,255,255)
-##        leds[1-led+61] = (255,255,255)
-##        leds[1-led+122] = (255,255,255)
-##        leds[1-led+183]= (255,255,255)
-##        leds[1-led+244]= (255,255,255)
-##        leds[led+4] = (255,255,255)
-##        leds[4-led+65] = (255,255,255)
-##        leds[4-led+126] = (255,255,255)
-##        leds[4-led+187]= (255,255,255)
-##        leds[4-led+248]= (255,255,255)
-##        leds[led+8] = (255,255,255)
-##        leds[8-led+69] = (255,255,255)
-##        leds[8-led+130] = (255,255,255)
-##        leds[8-led+191]= (255,255,255)
-##        leds[8-led+252]= (255,255,255)
-##        leds[led+12] = (255,255,255)
-##        leds[12-led+73] = (255,255,255)
-##        leds[12-led+134] = (255,255,255)
-##        leds[12-led+195]= (255,255,255)
-##        leds[12-led+256]= (255,255,255)
-##        leds[led+16] = (255,255,255)
-##        leds[led+77] = (255,255,255)
-##        leds[led+138] = (255,255,255)
-##        leds[led+199]= (255,255,255)
-##        leds[led+260]= (255,255,255)
-##        leds[led+20] = (255,255,255)
-##        leds[led+81] = (255,255,255)
-##        leds[led+142] = (255,255,255)
-##        leds[led+203]= (255,255,255)
-##        leds[led+264]= (255,255,255)
-##        leds[led+24] = (255,255,255) #start
-##        leds[led+85] = (255,255,255)
-##        leds[led+146] = (255,255,255)
-##        leds[led+207]= (255,255,255)
-##        leds[led+268]= (255,255,255)#stop
-##        leds[led+28] = (255,255,255) #start
-##        leds[led+89] = (255,255,255)
-##        leds[led+150] = (255,255,255)
-##        leds[led+211]= (255,255,255)
-##        leds[led+272]= (255,255,255)#
-##        leds[led+32] = (255,255,255) #start
-##        leds[led+93] = (255,255,255)
-##        leds[led+154] = (255,255,255)
-##        leds[led+215]= (255,255,255)
-##        leds[led+276]= (255,255,255)
-##        leds[led+36] = (255,255,255) #start
-##        leds[led+97] = (255,255,255)
-##        leds[led+158] = (255,255,255)
-##        leds[led+219]= (255,255,255)
-##        leds[led+280]= (255,255,255)
-##        leds[led+40] = (255,255,255) #start
-##        leds[led+101] = (255,255,255)
-##        leds[led+162] = (255,255,255)
-##        leds[led+223]= (255,255,255)
-##        leds[led+284]= (255,255,255)
-##        leds[led+44] = (255,255,255) #start
-##        leds[led+105] = (255,255,255)
-##        leds[led+166] = (255,255,255)
-##        leds[led+227]= (255,255,255)
-##        leds[led+288]= (255,255,255)
-##        leds[led+48] = (255,255,255) #start
-##        leds[led+109] = (255,255,255)
-##        leds[led+170] = (255,255,255)
-##        leds[led+231]= (255,255,255)
-##        leds[led+292]= (255,255,255)
-##        leds[led+52] = (255,255,255) #start
-##        leds[led+113] = (255,255,255)
-##        leds[led+174] = (255,255,255)
-##        leds[led+235]= (255,255,255)
-##        leds[led+296]= (255,255,255)
-##        leds[led+56] = (255,255,255) #start
-##        leds[led+117] = (255,255,255)
-##        leds[led+178] = (255,255,255)
-##        leds[led+239]= (255,255,255)
-##        leds[led+300]= (255,255,255)
-##        leds[led+60] = (255,255,255) #start
-##        leds[led+121] = (255,255,255)
-##        leds[led+182] = (255,255,255)
-##        leds[led+243]= (255,255,255)
-##        leds[led+304]= (255,255,255)
-##        
-##
-##     
-##        for led in range(300, 360):
-##            if led== 359:
-##                led=0
-##        client. put_pixels(leds)       
-##        time.sleep(.1)
-##
-##
-
-
-s = 1.0 ##maximum colour
-v = 1.0 ##maximum brightness
-
-
-def snowday ():
-    #snowman
-    while True:
-        for line in range(8):
-            led_colour = [ (0,0,0) ] * 360
-            for i in range(30):
-                    led_colour[line * 30 + i * 4] = (255,255,255)
-
-                    
-                    
-            client.put_pixels(led_colour)
-            time.sleep(0.5)
-happy()
-pattern()
-snowday()
-
-
-
-
-
-
 
