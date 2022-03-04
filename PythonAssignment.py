@@ -76,6 +76,7 @@ def pattern () :
             time.sleep(.1)
             leds[led+1]=(255,0,255)
             time.sleep(.1)
+        break
         
 def blinking () :
     leds= [(0,0,0)] *360
@@ -128,7 +129,7 @@ def snowday ():
 
             client.put_pixels(leds)
             time.sleep(0.1)
-
+        break
 
 
 
@@ -145,9 +146,4 @@ button.pack(padx = 5, pady = 5 )
 button= tk.Button(text = '⛯blinking⛯', width = 10, height = 2, command= blinking)
 button.pack(padx = 5, pady = 5 )
 window.mainloop()
-
-
-
-
-        
 
